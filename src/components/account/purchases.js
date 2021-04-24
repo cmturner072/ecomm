@@ -1,10 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
-
 import * as actions from '../../actions';
-import PurchaseDetail from './purchaseDetail';
-
 
 class Purchases extends Component {
 
@@ -13,12 +10,17 @@ class Purchases extends Component {
     }
 
     render() {
-        const { className } = this.props
+        const { className } = this.props;
+
         return (
-            <div className={`${className}purchases`}>
+            <div className={`${className} purchases`}>
                 {
                     this.props.purchases.map(purchase => {
-                        return <div>{purchase.title}</div>
+                        return (
+                            <div key={purchase._id} className='purchases__purchase purchase'>
+                                <img className='purchase__img' src='http://via.placeholder.com/80x80'/>
+                            </div>
+                        )
                     })
                 }
             </div>
@@ -32,4 +34,5 @@ function mapStateToProps(state) {
 }
 
 Purchases = connect(mapStateToProps, actions)(Purchases);
+
 export default Purchases;
