@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
@@ -12,26 +13,26 @@ class Shop extends Component {
                 path: '/signin'
             }
         ]
-        
         this.props.setHeaderLinks(headerLinks);
+        this.props.fetchShopCategories();
+        // fetch navbar links
+            // set navbar links
+            // filter products with links
         // fetch shop products action creator
-        // fetch navbar link
-            // set the navbar links
-            // filter products link
     }
     render() {
         return (
             <div className='shop'>
-                {/* shop search bar component */}
-                {/* shop product component */}
-                {/* cart button */}
+                {/* shop search bar */}
+                {/* shop product */}
+                {/* shop cart button */}
             </div>
         )
     }
 }
 
 function mapStateToProps(state) {
-    return { state }
+    return { state } 
 }
 
 Shop = connect(mapStateToProps, actions)(Shop);

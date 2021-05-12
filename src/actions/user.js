@@ -1,4 +1,4 @@
-import {
+import { 
     SET_USER_PURCHASES,
     SET_PURCHASE_DETAIL
 } from './types';
@@ -17,14 +17,13 @@ export function fetchUserPurchases() {
             {
                 _id: 0,
                 total: 19.40,
-                orderNumber: 'A0004822468',
+                orderNumber: 'A0048248343',
                 orderDate: new Date().toDateString(),
                 creditCard: '-0000',
                 user: {
                     name: 'Jordan Hudgens',
                     shippingAddress: '1234 West State Street'
                 }
-
             },
             {
                 _id: 1,
@@ -103,7 +102,7 @@ export function fetchUserPurchases() {
                     shippingAddress: '348 Yo State Street'
                 }
             },
-           
+          
         ]
     })
 }
