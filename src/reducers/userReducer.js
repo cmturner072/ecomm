@@ -2,10 +2,12 @@ import {
     SET_USER_PURCHASES,
     SET_PURCHASE_DETAIL,
     SET_CART_PRODUCTS,
-    ADD_CART_PRODUCT
+    ADD_CART_PRODUCT,
+    AUTHENTICATE_USER
 } from '../actions/types';
 
-const INITAL_STATE = {
+const INITIAL_STATE = {
+    user: {},
     cartProducts: [],
     purchases: [],
     purchaseDetail: {
@@ -21,29 +23,34 @@ const INITAL_STATE = {
     }
 }
 
-export default function(state = INITAL_STATE, action) {
+export default function(state = INITIAL_STATE, action) {
     switch (action.type) {
+        case AUTHENTICATE_USER: 
+            const { user } = action.payload;
+            return {
+                ...state,
+                user
+            }
         case ADD_CART_PRODUCT:
             var exists = false
             const newCP = action.payload;
             var cartProducts = []
             state.cartProducts.map(cartProduct => {
-                    if(cartProduct.product._id == newCP._id) {
-                        exists = true
-                        cartProduct.quantity += 1;
-                    }
-                    cartProducts.push(cartProduct);
+                if(cartProduct.product._id == newCP._id) {
+                    exists = true
+                    cartProduct.quantity += 1;
+                }
+                cartProducts.push(cartProduct);
             })
-           if(exists == false) {
-              cartProducts.push({
-                  _id: state.cartProducts.length + 1,
-                  product: newCP,
-                  quantity: 1
-              })  
-           } 
-
+            if(exists == false)  {
+                cartProducts.push({
+                    _id: state.cartProducts.length + 1,
+                    product: newCP,
+                    quantity: 1
+                })
+            }
             return {
-               ...state,
+                ...state,
                 cartProducts: cartProducts
             }
         case SET_CART_PRODUCTS:
@@ -58,18 +65,15 @@ export default function(state = INITAL_STATE, action) {
             }
         case SET_PURCHASE_DETAIL:
             let purchaseDetail;
-            state.purchases.map(purchase =>{
+            state.purchases.map(purchase => {
                 if(purchase._id == action.payload) {
                     purchaseDetail = purchase;
                 }
-                
             })
             return {
                 ...state,
                 purchaseDetail
             }
         default: return state;
-
-
     }
 }
